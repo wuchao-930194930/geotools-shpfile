@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.xiaowuzian.tools</groupId>
+    <artifactId>shpfile</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+    <dependencies>
+        <!--		shp解析-->
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-shapefile</artifactId>
+            <version>19.2</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/gt-shapefile-19.2.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.ejml</groupId>
+            <artifactId>ejml-ddense</artifactId>
+            <version>0.39</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/ejml-ddense-0.32.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.ejml</groupId>
+            <artifactId>ejml-core</artifactId>
+            <version>0.39</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/ejml-core-0.39.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-opengis</artifactId>
+            <version>19.2</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/gt-opengis-19.2.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-data</artifactId>
+            <version>19.2</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/gt-data-19.2.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-api</artifactId>
+            <version>19.2</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/gt-api-19.2.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-main</artifactId>
+            <version>19.2</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/gt-main-19.2.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-metadata</artifactId>
+            <version>19.2</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/gt-metadata-19.2.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-referencing</artifactId>
+            <version>19.2</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/gt-referencing-19.2.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-geojson</artifactId>
+            <version>19.2</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/gt-geojson-19.2.jar</systemPath>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.json.simple</groupId>
+            <artifactId>json-simple</artifactId>
+            <version>1.1</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/json-simple-1.1.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>javax.measure</groupId>
+            <artifactId>jsr-275-1.0-beta</artifactId>
+            <version>2</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/jsr-275-1.0-beta-2.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.vividsolutions</groupId>
+            <artifactId>jts</artifactId>
+            <version>1.13</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/jts-1.13.jar</systemPath>
+        </dependency>
+        <!--		shp解析-->
+    </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>lib</directory>
+                <targetPath>BOOT-INF/lib/</targetPath>
+                <includes>
+                    <include>**/*.jar</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
+
+</project>
