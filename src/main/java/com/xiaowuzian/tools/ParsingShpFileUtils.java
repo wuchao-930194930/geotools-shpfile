@@ -1,5 +1,6 @@
 package com.xiaowuzian.tools;
 
+import com.alibaba.fastjson.JSONObject;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.Point;
@@ -9,18 +10,20 @@ import org.geotools.data.shapefile.ShapefileDataStore;
 import org.geotools.data.simple.SimpleFeatureCollection;
 import org.geotools.data.simple.SimpleFeatureIterator;
 import org.geotools.data.simple.SimpleFeatureSource;
+import org.geotools.geojson.feature.FeatureJSON;
 import org.geotools.geometry.jts.ReferencedEnvelope;
+import org.json.simple.JSONArray;
 import org.opengis.feature.Property;
 import org.opengis.feature.simple.SimpleFeature;
 import org.opengis.feature.simple.SimpleFeatureType;
 import org.opengis.feature.type.Name;
 import org.opengis.filter.Filter;
-
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.StringWriter;
 import java.nio.charset.Charset;
 import java.util.*;
-
 /**
  * @Author 小伍子安
  * @Date 2021/3/16 上午11:33
@@ -29,7 +32,9 @@ import java.util.*;
 public class ParsingShpFileUtils {
 
     public static void main(String[] args) throws Exception {
-        System.out.println(ParsingShpFile("/Users/wuchao/Documents/bengzhan.shp"));
+//        System.out.println(ParsingShpFile("/Users/wuchao/Documents/bengzhan.shp"));
+        String geojson = shape2Geojson("/Users/wuchao/Documents/项目/厦门水务/gis/trans-3/bengzhan.shp", "/Users/wuchao/Desktop/shptogeojson.json");
+        System.out.println(geojson);
     }
 
     /**
@@ -133,7 +138,6 @@ public class ParsingShpFileUtils {
         }
         return list;
     }
-
     public static SimpleFeatureCollection readShp(String path) {
         return readShp(path, null);
 
@@ -141,7 +145,7 @@ public class ParsingShpFileUtils {
 
     public static SimpleFeatureCollection readShp(String path, Filter filter) {
         SimpleFeatureSource featureSource = readStoreByShp(path);
-        if (featureSource == null) return null;
+        if (featureSource == null) {return null;};
         try {
             return filter != null ? featureSource.getFeatures(filter) : featureSource.getFeatures();
         } catch (IOException e) {
@@ -162,5 +166,46 @@ public class ParsingShpFileUtils {
             e.printStackTrace();
         }
         return featureSource;
+    }
+    /**
+     * shp转换为Geojson
+     * @param shpPath shp文件地址
+     * @param jsonPath 要写入的json文件地址
+     * @return
+     */
+    public static String shape2Geojson(String shpPath, String jsonPath){
+        FeatureJSON fjson = new FeatureJSON();
+        StringBuffer sb = new StringBuffer();
+        try{
+            sb.append("{\"type\": \"FeatureCollection\",\"features\": ");
+
+            //读取shp
+            SimpleFeatureCollection colls = readShp(shpPath);
+            //拿到所有features
+            SimpleFeatureIterator itertor = colls.features();
+            JSONArray array = new JSONArray();
+            while (itertor.hasNext())
+            {
+                SimpleFeature feature = itertor.next();
+                StringWriter writer = new StringWriter();
+                fjson.writeFeature(feature, writer);
+                JSONObject json = JSONObject.parseObject(writer.toString());
+                array.add(json);
+            }
+            itertor.close();
+            sb.append(array.toString());
+            sb.append("}");
+
+            //写入文件
+            FileOutputStream fos = new FileOutputStream(jsonPath,false);
+//true表示在文件末尾追加
+            fos.write(sb.toString().getBytes());
+            fos.close();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+
+        }
+        return sb.toString();
     }
 }
