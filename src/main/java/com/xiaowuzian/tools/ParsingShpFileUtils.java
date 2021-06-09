@@ -99,6 +99,7 @@ public class ParsingShpFileUtils {
             }
             list.add(map);
         }
+        iters.close();
         return list;
     }
 
@@ -136,6 +137,7 @@ public class ParsingShpFileUtils {
             }
             list.add(map);
         }
+        iters.close();
         return list;
     }
     public static SimpleFeatureCollection readShp(String path) {
