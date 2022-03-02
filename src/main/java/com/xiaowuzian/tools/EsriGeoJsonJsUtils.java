@@ -12,7 +12,7 @@ import java.util.*;
  * 小伍子安
  * 将shp文件转为esrijson文件  逻辑是先将shp转为GeoJSON  然后再将GeoJSON转为esrijson
  */
-public class EsriGeoJsonJsUtil {
+public class EsriGeoJsonJsUtils {
     public static void main(String[] args) throws IOException {
         String shpPath = "";//shp文件地址
         String geojsonPath = "";//生成的GeoJSON文件地址
