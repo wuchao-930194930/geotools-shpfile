@@ -33,8 +33,15 @@ public class ParsingShpFileUtils {
 
     public static void main(String[] args) throws Exception {
 //        System.out.println(ParsingShpFile("/Users/wuchao/Documents/bengzhan.shp"));
-        String geojson = shape2Geojson("/Users/wuchao/Documents/项目/厦门水务/gis/trans-3/bengzhan.shp", "/Users/wuchao/Desktop/shptogeojson.json");
-        System.out.println(geojson);
+        String geojson = shape2Geojson("/Users/wuchao/Desktop/taxi_zones/taxi_zones.shp","/Users/wuchao/Desktop/shptogeojson.json");
+//        String geojson = shape2Geojson("/Users/wuchao/Documents/项目/厦门水务/gis/trans-3/bengzhan.shp", "/Users/wuchao/Desktop/shptogeojson.json");
+        String s = EsriGeoJsonJsUtils.geo2ersi(geojson, "");
+        //写入文件
+        FileOutputStream fos = new FileOutputStream("/Users/wuchao/Desktop/esrijson.json",false);
+//true表示在文件末尾追加
+        fos.write(s.toString().getBytes());
+        fos.close();
+        System.out.println(s);
     }
 
     /**
@@ -210,4 +217,8 @@ public class ParsingShpFileUtils {
         }
         return sb.toString();
     }
+    public static void getBoundary(){
+
+    }
+
 }
