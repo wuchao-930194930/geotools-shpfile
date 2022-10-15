@@ -79,7 +79,13 @@
             <scope>system</scope>
             <systemPath>${project.basedir}/lib/gt-metadata-19.2.jar</systemPath>
         </dependency>
-
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-coverage</artifactId>
+            <version>19.2</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/gt-coverage-19.2.jar</systemPath>
+        </dependency>
         <dependency>
             <groupId>org.geotools</groupId>
             <artifactId>gt-referencing</artifactId>
